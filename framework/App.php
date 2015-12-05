@@ -13,7 +13,6 @@ final class App
 
 		$className = '\app\controllers\\'.$controller;
 
-		// $c = new \app\controllers\IndexController();
 		(new $className())->$action();
 	}
 
