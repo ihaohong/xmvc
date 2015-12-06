@@ -6,7 +6,7 @@ class IndexController extends BaseController
 {
 	public function indexAction()
 	{
-		// $this->view->setLayout('layouts/default');
+		$this->view->setLayout('layouts/default');
 		$this->view->render('index/index', ['name' => 'haohong']);
 	}
 }

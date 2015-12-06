@@ -22,7 +22,8 @@ class View
 	{
 		$this->file = $view;
 		$this->data = $data;
-		if (isset($layout)) {
+
+		if (isset($this->layout)) {
 			$viewPath = $this->getViewPath();
 			$layoutPath = $viewPath.$this->layout.'.php';
 			require $layoutPath;

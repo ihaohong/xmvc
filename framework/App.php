@@ -5,15 +5,31 @@ final class App
 {
 	public static function run()
 	{
-		$controller = ucfirst($_GET['c']).'Controller';
-		$action = $_GET['a'].'Action';
 
 		spl_autoload_register(__NAMESPACE__.'\\App::appLoader');
 		spl_autoload_register(__NAMESPACE__.'\\App::frameworkLoader');
 
+		self::initDI();
+
+		$controller = ucfirst($_GET['c']).'Controller';
+		$action = $_GET['a'].'Action';
+
 		$className = '\app\controllers\\'.$controller;
 
 		(new $className())->$action();
+	}
+
+	public static function initDI()
+	{
+		core\DI::set('db', function () {
+			return \framework\component\DB::getInstance();
+		});
+
+		core\DI::set('config', function () {
+			return core\Config(APP_PATH.'src/config.php');
+		});
+
+		dd(core\DI::get('config'));
 	}
 
 	public static function appLoader($class)
