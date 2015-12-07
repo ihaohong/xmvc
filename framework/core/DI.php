@@ -7,7 +7,6 @@ class DI
 
 	static function set($alias, Callable $callback)
 	{
-		// dd($callback);
 		self::$objects[$alias] = $callback;
 	}
 
@@ -15,7 +14,5 @@ class DI
 	{
 		$callback = self::$objects[$name];
 		return $callback();
-
-		// return call_user_func_array(self::$objects[$alias], []);
 	}
 }

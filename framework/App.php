@@ -1,11 +1,22 @@
 <?php
 namespace framework;
 
+use framework\core\DI;
+use framework\component\DB;
+use framework\core\Config;
+
 final class App
 {
-	public static function run()
+	private $appRoot;
+
+	public function _construct($appRoot)
 	{
-		self::initDI();
+		$this->appRoot = $appRoot;
+	}
+
+	public function run()
+	{
+		$this->initDI();
 
 		$controller = ucfirst($_GET['c']).'Controller';
 		$action = $_GET['a'].'Action';
@@ -15,17 +26,29 @@ final class App
 		(new $className())->$action();
 	}
 
-	public static function initDI()
+	public function initDI()
 	{
-		core\DI::set('db', function () {
-			return \framework\component\DB::getInstance();
+		DI::set('db', function () {
+			return $this->diDb();
 		});
 
-		core\DI::set('config', function () {
-			return new core\Config(APP_PATH.'src/config.php');
+		DI::set('config', function () {
+			return $this->diConfig();
 		});
-
-		// dd(core\DI::get('config'));
 	}
+
+	public function diDb() 
+	{
+		return DB::getInstance();
+	}
+
+	public function diConfig()
+	{
+		$config = new Config(ROOT_PATH.'application/src/config/config.default.php');
+		$config->merge(ROOT_PATH.'application/src/config/config.local.php');
+
+		return $config->get();
+	}
+
 
 }

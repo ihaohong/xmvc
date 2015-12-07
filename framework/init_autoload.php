@@ -1,5 +1,5 @@
 <?php
-autoload('app\\', APP_PATH.'src/');
+autoload('app\\', ROOT_PATH.'application/src/');
 autoload('framework\\', ROOT_PATH.'framework/');
 
 function autoload($prefix, $baseDir)

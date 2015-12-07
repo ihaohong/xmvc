@@ -16,6 +16,7 @@ class DB
 
 	public static function getInstance()
 	{
+		return 'db';
 		if (isset(self::$link)) {
 			return self::$link;
 		} else {
@@ -25,8 +26,6 @@ class DB
 
 	private function getMysqli()
 	{
-		
-
 		if (isset($mysqli)) {
 			return $mysqli;
 		} else {

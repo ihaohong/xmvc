@@ -1,16 +1,19 @@
 <?php
 namespace framework\core;
 
+use framework\core\DI;
+
 class View
 {
-
 	private $layout;
 	private $file;
 	private $data;
 
 	private function getViewPath()
 	{
-		return VIEW_PATH;
+		$config = DI::get('config');
+		$viewPath = $config->path->viewPath;
+		return $viewPath;
 	}
 
 	public function setLayout($layout)
