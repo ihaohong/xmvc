@@ -20,13 +20,9 @@ return [
 	],
 
 	'debug' => 0,
+	'path' => [
 
-	// 'path' => [
-	// 	'rootPath' => ROOT_PATH,
-	// 	'appPath' => ROOT_PATH.'application/',
-	// 	'viewPath' => ROOT_PATH.'application/src/views/',
-	// ],
-
+	],
 	'url' => [
 
 	],

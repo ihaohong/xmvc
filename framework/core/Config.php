@@ -10,8 +10,11 @@ class Config
 		$this->config = $this->arrayToObject(include($path));
 	}
 
-	public function get()
+	public function get($type = 'object')
 	{
+		if ($type === 'array') {
+			return $this->objectToArray($this->config);
+		}
 		return $this->config;
 	}
 
@@ -25,6 +28,11 @@ class Config
 		$this->config = $this->arrayToObject($resultArr);
 
 		return $this->get();
+	}
+
+	public function add($key, $value, $path)
+	{
+		$this->config->$path->$key = $value;	
 	}
 
 	private function arrayToObject($array)

@@ -26,29 +26,60 @@ final class App
 		(new $className())->$action();
 	}
 
-	public function initDI()
+	private function initDI()
 	{
-		DI::set('db', function () {
-			return $this->diDb();
-		});
-
 		DI::set('config', function () {
 			return $this->diConfig();
 		});
+
+		DI::set('db', function () {
+			return $this->diDb();
+		});
 	}
 
-	public function diDb() 
+	private function diDb() 
 	{
 		return DB::getInstance();
 	}
 
-	public function diConfig()
+	private function diConfig()
 	{
-		$config = new Config(ROOT_PATH.'application/src/config/config.default.php');
-		$config->merge(ROOT_PATH.'application/src/config/config.local.php');
+		$cacheFile = $this->appRoot.'application/src/config/_cache.config.php';
+
+		if ($config = $this->readCache($cacheFile)) {
+			return $config;
+		}
+
+		$config = new Config($this->appRoot.'application/src/config/config.default.php');
+		$config->merge($this->appRoot.'application/src/config/config.local.php');
+		$config->add('viewPath', $this->appRoot.'application/src/views/', 'path');
+
+		$this->writeCache($cacheFile, $config->get());
 
 		return $config->get();
 	}
 
+	private function readCache($cacheFile, $serialize = true)
+	{
+		if (file_exists($cacheFile) && $cache = include $cacheFile) {
+			return $serialize ? unserialize($cache) : $cache;
+		}
 
+		return null;
+	}
+
+	private function writeCache($cacheFile, $content, $serialize = true)
+	{
+		if ($cacheFile && $fh = fopen($cacheFile, 'w')) {
+			if ($serialize) {
+				fwrite($fh, "<?php return '".serialize($content)."';");
+			} else {
+				fwrite($fh, '<?php return '.var_export($content, true).';');
+			}
+			fclose($fh);
+			return true;
+		}
+
+		return false;
+	}
 }

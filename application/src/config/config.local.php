@@ -3,11 +3,7 @@
 return [
 	// 'debug' => 1,
 
-	'path' => [
-		'rootPath' => ROOT_PATH,
-		'appPath' => ROOT_PATH.'application/',
-		'viewPath' => ROOT_PATH.'application/src/views/',
-	],
+
 
 	'url' => [
 
@@ -15,7 +11,7 @@ return [
 
 	'db' => [
 		'master' => [
-			'host' => '127.0.0.8',
+			'host' => '127.0.0.1',
 			'username' => 'root',
 			'password' => '114477',
 			'dbname' => 'mvc',
