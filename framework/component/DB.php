@@ -53,31 +53,46 @@ class DB
 
 	public function query($sql)
 	{
+		$result = $this->link->query($sql);
 
+		return $result;
 	}
 
 	public function affectedRows()
 	{
-
+		return $this->link->affected_rows;
 	}
 
-	public function getData($sql)
+	public function getData($sql, $fetch = 'assoc')
 	{
+		$result = $this->query($sql);
+		$fetchMethod = 'fetch_'.$fetch;
 
+		$data = [];
+		while ($item = $result->$fetchMethod()) {
+			$data[] = $item;
+		}
+
+		return $data;
 	}
 
-	public function getLine($sql)
+	public function getLine($sql, $fetch = 'assoc')
 	{
-
+		$result = $this->getData($sql, $fetch);
+		if ($result) {
+			return $result[0];
+		}
+		return false;
 	}
 
-	public function getVar()
+	public function getVar($sql)
 	{
-
+		$result = $this->getLine($sql, 'array');
+		return $result[0];
 	}
 
 	public function lastId()
 	{
-
+		return $this->link->insert_id;
 	}
 }

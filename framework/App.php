@@ -2,7 +2,7 @@
 namespace framework;
 
 use framework\core\DI;
-use framework\component\DB;
+use framework\component\DAO;
 use framework\core\Config;
 
 final class App
@@ -39,7 +39,7 @@ final class App
 
 	private function diDb() 
 	{
-		return DB::getInstance();
+		return DAO::getInstance();
 	}
 
 	private function diConfig()
