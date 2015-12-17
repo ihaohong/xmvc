@@ -1,7 +1,9 @@
 <?php
 namespace framework\core;
 
-class Model
-{
+use framework\component\Dao;
 
+class Model 
+{
+	
 }

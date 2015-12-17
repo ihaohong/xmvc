@@ -3,16 +3,17 @@ namespace app\controllers;
 
 use framework\core\Controller as BaseController;
 use framework\core\DI;
+use app\models\PostModel;
 
 class IndexController extends BaseController
 {
 	public function indexAction()
 	{
-		$db = DI::get('db');
+		$postModel = new PostModel();
 
-		$sql = "SELECT username FROM users LIMIT 1";
+		$posts = $postModel->findPosts();
 
-		dd($db->getVar($sql));
+		dd($posts);
 
 		$this->view->setLayout('layouts/default');
 		$this->view->render('index/index', ['name' => 'haohong']);

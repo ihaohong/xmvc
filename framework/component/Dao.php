@@ -5,9 +5,9 @@ use framework\core\DI;
 
 class Dao extends DB
 {
-	public function find($table, $conditions)
+	public function find($table, $conditions, $columns=[])
 	{
-		
+		$sql = "SELECT $columns FROM $table WHERE ";
 	}
 
 	public function insert($table, $params)
