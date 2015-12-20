@@ -39,7 +39,7 @@ final class App
 
 	private function diDb() 
 	{
-		return DAO::getInstance();
+		return \framework\component\Database\MySQLi::getInstance();
 	}
 
 	private function diConfig()

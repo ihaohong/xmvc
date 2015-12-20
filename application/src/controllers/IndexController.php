@@ -9,13 +9,16 @@ class IndexController extends BaseController
 {
 	public function indexAction()
 	{
-		$postModel = new PostModel();
+		$db = DI::get('db');
+		$result = $db->query("select");
 
-		$posts = $postModel->findPosts();
+		// $postModel = new PostModel();
 
-		dd($posts);
+		// $posts = $postModel->findPosts();
 
-		$this->view->setLayout('layouts/default');
-		$this->view->render('index/index', ['name' => 'haohong']);
+		// dd($posts);
+
+		// $this->view->setLayout('layouts/default');
+		// $this->view->render('index/index', ['name' => 'haohong']);
 	}
 }
