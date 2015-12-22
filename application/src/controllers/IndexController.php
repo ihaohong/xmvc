@@ -10,7 +10,8 @@ class IndexController extends BaseController
 	public function indexAction()
 	{
 		$db = DI::get('db');
-		$result = $db->query("select");
+		$result = $db->getLine("select password from users");
+		dd($result);
 
 		// $postModel = new PostModel();
 

@@ -26,11 +26,38 @@ class MySQLi implements IDatabase
 	{
 		return $this->conn->query($sql);
 	}
- 
 
 	function close()
 	{
 		$this->conn->close();
+	}
+
+	function getData($sql, $fetch = 'assoc')
+	{
+		$result = $this->query($sql);
+		$fetchMethod = 'fetch_'.$fetch;
+
+		$data = [];
+		while ($item = $result->$fetchMethod()) {
+			$data[] = $item;
+		}
+
+		return $data;
+	}
+
+	function getLine($sql, $fetch = 'assoc')
+	{
+		$result = $this->getData($sql, $fetch);
+		if ($result) {
+			return $result[0];
+		}
+		return false;
+	}
+
+	function getVar($sql)
+	{
+		$result->getLine($sql, 'array');
+		return $result[0];
 	}
 
 	static function getInstance()
