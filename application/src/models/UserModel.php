@@ -1,19 +1,15 @@
 <?php
 namespace app\models;
 
-use framework\component\Model;
+use framework\component\Model as BaseModel;
 use framework\core\DI;
 
 class UserModel extends BaseModel
 {
+	
 
-	public function __construct()
+	public function findUsers()
 	{
-		// parent::__construct();
-	}
-
-	public function findPosts()
-	{
-		return 'posts';
+		return 'users';
 	}
 }
