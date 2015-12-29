@@ -9,10 +9,13 @@ class IndexController extends BaseController
 {
 	public function indexAction()
 	{
-		$postModel = new PostModel();
-		$posts = $postModel->find(['userId' => 333]);
+		$logger = new \framework\core\Log('haohongtest.log');
+		$logger->info("haha");
 
-		dd($posts);
+		// $postModel = new PostModel();
+		// $posts = $postModel->find(['userId' => 333]);
+
+		// dd($posts);
 
 		// $this->view->setLayout('layouts/default');
 		// $this->view->render('index/index', ['name' => 'haohong']);

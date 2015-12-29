@@ -3,7 +3,9 @@
 return [
 	// 'debug' => 1,
 
-
+	'dir' => [
+		'log' => ROOT_PATH.'application/logs/',
+	],
 
 	'url' => [
 
