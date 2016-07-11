@@ -1,6 +1,7 @@
 <?php
 namespace framework;
 
+use framework\component\Macaw;
 use framework\core\DI;
 use framework\component\DAO;
 use framework\core\Config;
@@ -17,13 +18,14 @@ final class App
 	public function run()
 	{
 		$this->initDI();
+		$this->registerRouter();
 
-		$controller = ucfirst($_GET['c']).'Controller';
-		$action = $_GET['a'].'Action';
+		Macaw::dispatch();
+	}
 
-		$className = '\app\controllers\\'.$controller;
-
-		(new $className())->$action();
+	private function registerRouter()
+	{
+		require ROOT_PATH.'application/src/config/routes.php';
 	}
 
 	private function initDI()

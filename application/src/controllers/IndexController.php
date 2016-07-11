@@ -7,15 +7,15 @@ use app\models\PostModel;
 
 class IndexController extends BaseController
 {
-	public function indexAction()
+	public function index()
 	{
 		$logger = new \framework\core\Log('haohongtest.log');
 		$logger->info("haha");
 
-		// $postModel = new PostModel();
-		// $posts = $postModel->find(['userId' => 333]);
+		 $postModel = new PostModel();
+		 $posts = $postModel->find(['userId' => 333]);
 
-		// dd($posts);
+		 dd($posts);
 
 		// $this->view->setLayout('layouts/default');
 		// $this->view->render('index/index', ['name' => 'haohong']);
